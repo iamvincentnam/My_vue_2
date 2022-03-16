@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <title>My First vue App </title>
+    <style>
+       article{
+    width: 400px;
+    background: rgb(12, 7, 39);
+    color: rgb(255, 255, 255);
+    height: 500px;
+    margin:2em auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px;
+        }
+    div h1{text-align: center;}
+
+
+    article div button, .restart_btn
+    {color:white;
+    background-color: orange;
+    padding:5px 15px ; border: none; 
+    border-radius: 7px;
+    cursor: pointer;
+    transition: 0.2s;
+  margin-top: 0.5rem;}
+   
+  
+  .punch_bag_container{
+      position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 85, 85, 0.089);
+    padding: 1.4rem 0;
+    }
+  
+
+.burst{
+      position: absolute;
+      border-radius: 10px;
+      height: 130px;
+      
+      top: 5.2em;
+      transform: translateX(2px);
+    
+     transform: scale(1);
+      }
+
+  .health_bar{
+  background-color: brown;
+  height: 100%;
+  width: 99%;
+  
+  
+  }
+  .health_container
+  {
+      width: 150px;
+     background-color: aliceblue; 
+      height: 25px;
+     margin: 10px;
+     border: 2px solid silver;
+    }
+
+    .punch_btn{background-color: crimson;}
+    .punch_btn:active{transform: scale(0.9);
+      background-color: rgb(177, 0, 35)}
+    .restart_btn:active
+    {
+      transform: scale(0.9);
+      background-color: rgb(161, 105, 1);
+    }
+    
+    </style>
+</head>
+<body>
+ 
+    <article >
+
+       <div id="vueapp">
+         <h1>{{message}}</h1>
+         <p>{{message2}}</p> <br>
+        
+       
+        <div class=punch_bag_container>
+          <!-- <div id="image_container"> -->
+            <img src="./Screenshot 2022-03-14 181622.png" width="80px" alt="">
+            <img class="burst" src="./burst_image.jpg" width="58px" v-if="ended">
+          
+        
+          <div class="health_container">
+            <div class="health_bar"v-bind:style="{width:health_bar + '%'}" > </div>
+          </div>
+          <audio src="./mixkit-arcade-game-jump-coin-216.wav" ></audio>
+            <div id="button_div">
+              <button class="punch_btn" v-on:click="punch" v-if="!ended"> Punch</button>
+           <button class="restart_btn" v-on:click="restart"> Restart</button>
+            </div>
+           
+        </div>
+       
+        <!-- <button v-on:click="green=!green"> green</button>
+        <button v-on:click="yellow=!yellow"> yellow</button> -->
+       
+        </div>
+       
+ 
+    </article>
+    
+    <script>
+      
+      // always remember to use a uppercase for the word Vue
+      new Vue({
+        el:"#vueapp",
+
+        data:{
+          message: "My Vue APP",
+          message2:"This is a punch bag game made with vue.js.",
+          age:20,
+          health_bar:100,
+          ended: false,
+          result:false
+         
+        },
+       
+       
+      methods:{
+       
+        punch:function(){
+            this.health_bar-=10
+            console.log(this.health_bar);
+            if(this.health_bar < 10){
+              this.ended = true
+             
+             
+              console.log(this.ended)
+             
+            }
+           },
+        restart:function (){
+             this.health_bar =100;
+             console.log(this.health_bar)
+             this.ended = 
+             
+             this.result =false
+           }
+
+          
+
+        
+      },
+     
+    
+  })
+  var audio = document.querySelector('audio');
+      
+      console.log(audio)
+      var punch_btn = document.querySelector('.punch_btn');
+      punch_btn.addEventListener('click', ()=>{
+        audio.play();
+      }) 
+    </script>
+</body>
+</html>
+
